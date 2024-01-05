@@ -1,0 +1,476 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Mailing List Api",
+        "version": "0.1"
+    },
+    "paths": {
+        "/api/contacts": {
+            "get": {
+                "tags": [
+                    "Contacts"
+                ],
+                "summary": "Show all contacts",
+                "operationId": "0f9efb5609dbb039b35ecafb28e492a2",
+                "responses": {
+                    "200": {
+                        "description": "Show all contacts."
+                    },
+                    "default": {
+                        "description": "There was an error."
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Contacts"
+                ],
+                "summary": "Create a new Contact",
+                "operationId": "a3b0baf957a16c1ed505f2e8985c254c",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "fullname",
+                                    "email"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "description": "name of the contact",
+                                        "type": "string",
+                                        "example": "Jhon Doe"
+                                    },
+                                    "email": {
+                                        "description": "email of the contact",
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            },
+                            "example": {
+                                "fullname": "Jhon Doe",
+                                "email": "jhon@example.com",
+                                "phone": "555-555555"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Show contact."
+                    },
+                    "default": {
+                        "description": "There was an error."
+                    }
+                }
+            }
+        },
+        "/api/contacts/{uuid}": {
+            "get": {
+                "tags": [
+                    "Contacts"
+                ],
+                "summary": "Show specific contact by uuid",
+                "operationId": "5c382534031325d8e63fbaf30b899c2f",
+                "parameters": [
+                    {
+                        "name": "uuid",
+                        "in": "path",
+                        "description": "ID of contact to return",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Show specific contact."
+                    },
+                    "default": {
+                        "description": "There was an error."
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Contacts"
+                ],
+                "summary": "Update a Contact",
+                "operationId": "a25088537359ee6573e305ec327a4ba6",
+                "parameters": [
+                    {
+                        "name": "uuid",
+                        "in": "path",
+                        "description": "ID of contact to update",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "fullname",
+                                    "email"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "description": "name of the contact",
+                                        "type": "string",
+                                        "example": "Jhon Doe"
+                                    },
+                                    "email": {
+                                        "description": "email of the contact",
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            },
+                            "example": {
+                                "fullname": "Jhon Saveri",
+                                "email": "jhon@example.com",
+                                "phone": "555-555555"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Show contact."
+                    },
+                    "default": {
+                        "description": "There was an error."
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Contacts"
+                ],
+                "summary": "Delete specific contact by uuid",
+                "operationId": "cb35c7d6f0d89e3bedf9e6f6741152f1",
+                "parameters": [
+                    {
+                        "name": "uuid",
+                        "in": "path",
+                        "description": "ID of contact to delete",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Delete specific contact."
+                    },
+                    "default": {
+                        "description": "There was an error."
+                    }
+                }
+            }
+        },
+        "/api/contacts_groups": {
+            "post": {
+                "tags": [
+                    "ContactGroups"
+                ],
+                "summary": "Add a contact to a group",
+                "operationId": "54e214d5fd210cb948ed9dc283e726c0",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "contact_id",
+                                    "group_id"
+                                ],
+                                "properties": {
+                                    "contact_id": {
+                                        "description": "uuid of the contact",
+                                        "type": "string"
+                                    },
+                                    "group_id": {
+                                        "description": "uuid of the group",
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            },
+                            "example": {
+                                "contact_id": "5555-aaaa-ssss-7777",
+                                "group_id": "rrrr-6666-kkkk-8888"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Add contact."
+                    },
+                    "default": {
+                        "description": "There was an error."
+                    }
+                }
+            }
+        },
+        "/api/contacts_groups/{uuid}": {
+            "get": {
+                "tags": [
+                    "ContactGroups"
+                ],
+                "summary": "Show contacts from group by group uuid",
+                "operationId": "e57642653f054c36dccea740f992d749",
+                "parameters": [
+                    {
+                        "name": "uuid",
+                        "in": "path",
+                        "description": "ID of the group",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Show specific contacts in group."
+                    },
+                    "default": {
+                        "description": "There was an error."
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "ContactGroups"
+                ],
+                "summary": "Delete a Contact from a group",
+                "operationId": "61d46437a7abd6d46dc6a5fca3bb4f89",
+                "parameters": [
+                    {
+                        "name": "uuid",
+                        "in": "path",
+                        "description": "ID of contact to update",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "contact_id"
+                                ],
+                                "properties": {
+                                    "contact_id": {
+                                        "description": "uuid of the contact to remove",
+                                        "type": "string"
+                                    },
+                                    "email": {
+                                        "description": "email of the contact",
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            },
+                            "example": {
+                                "contact_id": "5555-7777-8888-9999"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Show contact."
+                    },
+                    "default": {
+                        "description": "There was an error."
+                    }
+                }
+            }
+        },
+        "/api/groups": {
+            "get": {
+                "tags": [
+                    "Groups"
+                ],
+                "summary": "Show all groups",
+                "operationId": "f286cbf34dc4be32a94459a335658168",
+                "responses": {
+                    "200": {
+                        "description": "Show all groups."
+                    },
+                    "default": {
+                        "description": "There was an error."
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Groups"
+                ],
+                "summary": "Create a new Group",
+                "operationId": "74e9878763e20c38ae5c9930b8d2d3f6",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name",
+                                    "description"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "description": "name of the group",
+                                        "type": "string",
+                                        "example": "New group"
+                                    },
+                                    "description": {
+                                        "description": "description of the group",
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            },
+                            "example": {
+                                "name": "New group",
+                                "description": "Lorem ipsum dolor sit amet"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Show Group."
+                    },
+                    "default": {
+                        "description": "There was an error."
+                    }
+                }
+            }
+        },
+        "/api/groups/{uuid}": {
+            "get": {
+                "tags": [
+                    "Groups"
+                ],
+                "summary": "Show specific group by uuid",
+                "operationId": "40f0fdaf12242f8753deb216375ecfc3",
+                "parameters": [
+                    {
+                        "name": "uuid",
+                        "in": "path",
+                        "description": "ID of group to return",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Show specific group."
+                    },
+                    "default": {
+                        "description": "There was an error."
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Groups"
+                ],
+                "summary": "Update a group",
+                "operationId": "7b269791b5d56a0fcab6b9a323bf5b6d",
+                "parameters": [
+                    {
+                        "name": "uuid",
+                        "in": "path",
+                        "description": "ID of group to update",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name",
+                                    "description"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "description": "name of the group",
+                                        "type": "string",
+                                        "example": "Jhon Doe"
+                                    },
+                                    "description": {
+                                        "description": "description of the group",
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            },
+                            "example": {
+                                "name": "the chill group",
+                                "description": "this is a group to chill"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Show group."
+                    },
+                    "default": {
+                        "description": "There was an error."
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Groups"
+                ],
+                "summary": "Delete specific group by uuid",
+                "operationId": "1a0e21a5b2777258114be209cf15fec8",
+                "parameters": [
+                    {
+                        "name": "uuid",
+                        "in": "path",
+                        "description": "ID of group to delete",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Delete specific group."
+                    },
+                    "default": {
+                        "description": "There was an error."
+                    }
+                }
+            }
+        }
+    }
+}
